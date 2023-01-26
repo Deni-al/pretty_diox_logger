@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
-import 'package:dio/dio.dart';
+import 'package:diox/diox.dart';
 
-class PrettyDioLogger extends Interceptor {
+class PrettyDioxLogger extends Interceptor {
   /// Print request [Options]
   final bool request;
 
@@ -38,7 +38,7 @@ class PrettyDioLogger extends Interceptor {
   /// you can also write log in a file.
   void Function(Object object) logPrint;
 
-  PrettyDioLogger(
+  PrettyDioxLogger(
       {this.request = true,
       this.requestHeader = false,
       this.requestBody = false,
@@ -86,7 +86,7 @@ class PrettyDioLogger extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     if (error) {
-      if (err.type == DioErrorType.response) {
+      if (err.type == DioErrorType.badResponse) {
         final uri = err.response?.requestOptions.uri;
         _printBoxed(
             header:
